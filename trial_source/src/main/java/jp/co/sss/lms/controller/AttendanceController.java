@@ -38,23 +38,22 @@ public class AttendanceController {
 	 * @param lmsUserId
 	 * @param courseId
 	 * @param model
+	 * @param True 
 	 * @return 勤怠管理画面
 	 * @throws ParseException
 	 */
 	@RequestMapping(path = "/detail", method = RequestMethod.GET)
-	public String index(Model model) {
-		// フォーマットを指定
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-		// 現在の日付を取得
-		Date date = new Date();
-		// フォーマットを適応
-		String trainingDate = sdf.format(date);
-
-		// 勤怠一覧の取得
+	public String index(Model model) throws ParseException {
+		//フォーマットを指定
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+		String strDate = sdf.format(new Date());
+		Date trainingDate = sdf.parse(strDate);
+		//勤怠一覧の取得
 		List<AttendanceManagementDto> attendanceManagementDtoList = studentAttendanceService
 				.getAttendanceManagement(loginUserDto.getCourseId(), loginUserDto.getLmsUserId());
 		model.addAttribute("attendanceManagementDtoList", attendanceManagementDtoList);
-
+		model.addAttribute("judge", studentAttendanceService.notEnterCount(loginUserDto.getLmsUserId(),
+				trainingDate, Constants.DB_FLG_FALSE));
 		return "attendance/detail";
 	}
 

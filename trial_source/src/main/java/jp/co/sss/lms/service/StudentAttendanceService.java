@@ -45,6 +45,30 @@ public class StudentAttendanceService {
 	private TStudentAttendanceMapper tStudentAttendanceMapper;
 
 	/**
+	 * 勤怠情報（受講生入力）過去日未入力件数取得
+	 * 
+	 * @param lmsUserId
+	 * @param trainingDate
+	 * @param deleteFlg
+	 * @return 過去日未入力件数の値
+	 */
+	
+	public boolean notEnterCount(Integer lmsUserId, Date trainingDate, Short deleteFlg) {
+		//条件判定に使用する値を格納
+		boolean judge;
+		//過去日の未入力が存在する場合trueを返す
+		if(tStudentAttendanceMapper.notEnterCount(lmsUserId, trainingDate, deleteFlg) > 0) {
+			judge = true;
+		}else {
+			judge = false;
+		}
+		System.out.println("各変数の値➡" + lmsUserId + trainingDate + deleteFlg);
+		System.out.println("取得件数は" + tStudentAttendanceMapper.notEnterCount(lmsUserId, trainingDate, deleteFlg));
+		return judge;
+	}
+
+	
+	/**
 	 * 勤怠一覧情報取得
 	 * 
 	 * @param courseId

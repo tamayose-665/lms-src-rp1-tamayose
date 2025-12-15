@@ -79,6 +79,7 @@
 			setInterval(function() {
 				$("#now").text('現在の時刻は　' + getClock() + '　です。');
 			}, 1000);
+			getDay();
 		});
 		function getClock() {
 			const today =  new Date();
@@ -87,7 +88,10 @@
 			return hours + ':' + minutes;
 		}
 		function getDay(){
-			alert("過去日の勤怠に未入力があります。");	
+			let judge = '[[${judge}]]';
+			if (judge) {
+				alert("過去日の勤怠に未入力があります。");
+			}
 		}
 	</script>
 
