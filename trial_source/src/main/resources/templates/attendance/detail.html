@@ -6,7 +6,7 @@
 <title>勤怠情報変更｜LMS</title>
 </head>
 <body>
-
+	
 	<!-- 完了メッセージ -->
 	<th:block th:if="${not #strings.isEmpty(message)}" id="message">
 		<div class="alert alert-info alert-dismissible fade in" role="alert">
@@ -79,6 +79,7 @@
 			setInterval(function() {
 				$("#now").text('現在の時刻は　' + getClock() + '　です。');
 			}, 1000);
+			<!-- 玉寄妃乃 – Task.25 -->
 			getDay();
 		});
 		function getClock() {
@@ -88,8 +89,8 @@
 			return hours + ':' + minutes;
 		}
 		function getDay(){
-			let judge = '[[${judge}]]';
-			if (judge) {
+			let judge = /*[[${judge}]]*/"judge";
+			if (judge == true) {
 				alert("過去日の勤怠に未入力があります。");
 			}
 		}

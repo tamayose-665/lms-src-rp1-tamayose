@@ -1,6 +1,7 @@
 package jp.co.sss.lms.service;
 
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -47,27 +48,21 @@ public class StudentAttendanceService {
 	/**
 	 * 勤怠情報（受講生入力）過去日未入力件数取得
 	 * 
-	 * @param lmsUserId
-	 * @param trainingDate
-	 * @param deleteFlg
-	 * @return 過去日未入力件数の値
+	 * @param lmsUserId 対象の受講生ユーザーID
+	 * @return 過去日未入力存在の有無をtrueかfalseで返す
+	 * @throws ParseException 文字列を日付として再フォーマットする際
 	 */
-	
-	public boolean notEnterCount(Integer lmsUserId, Date trainingDate, Short deleteFlg) {
-		//条件判定に使用する値を格納
-		boolean judge;
-		//過去日の未入力が存在する場合trueを返す
-		if(tStudentAttendanceMapper.notEnterCount(lmsUserId, trainingDate, deleteFlg) > 0) {
-			judge = true;
-		}else {
-			judge = false;
-		}
-		System.out.println("各変数の値➡" + lmsUserId + trainingDate + deleteFlg);
-		System.out.println("取得件数は" + tStudentAttendanceMapper.notEnterCount(lmsUserId, trainingDate, deleteFlg));
-		return judge;
+	// 玉寄妃乃 – Task.25
+	public boolean notEnterCount(Integer lmsUserId) throws ParseException{
+		//フォーマット指定で時刻を切り捨て
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+		String strDate = sdf.format(new Date());
+		Date trainingDate = sdf.parse(strDate);
+		Integer judge = tStudentAttendanceMapper.notEnterCount(lmsUserId, trainingDate, Constants.DB_FLG_FALSE);
+		//過去日の未入力が存在する場合true、存在しない場合falseを返す
+		return judge > 0;
 	}
 
-	
 	/**
 	 * 勤怠一覧情報取得
 	 * 
