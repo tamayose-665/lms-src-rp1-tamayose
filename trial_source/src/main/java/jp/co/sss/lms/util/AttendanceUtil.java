@@ -131,6 +131,79 @@ public class AttendanceUtil {
 		}
 		return map;
 	}
+	
+	/**
+	 * 出退勤時間(時)取得
+	 * 
+	 * @return 出退勤時間(時)
+	 */
+	public LinkedHashMap<Integer, String> getHourMap() {
+		LinkedHashMap<Integer, String> map = new LinkedHashMap<>();
+		map.put(null, "");
+		for (int i = 0; i < 24;) {
+			int hour = i;
+			String time;
+			
+			if (hour < 10) {
+				time = String.format("%02d", hour);
+			} else {
+				time = String.valueOf(hour);
+			}
+			
+			map.put(i, time);
+
+			i = i + 1;
+		}
+		return map;
+	}
+	
+	/**
+	 * 出退勤時間(分)取得
+	 * 
+	 * @return 出退勤時間(分)
+	 */
+	public LinkedHashMap<Integer, String> getMinuteMap() {
+		LinkedHashMap<Integer, String> map = new LinkedHashMap<>();
+		map.put(null, "");
+		for (int i = 0; i < 60;) {
+			int minute = i;
+			String time;
+			
+			if (minute < 10) {
+				time = String.format("%02d", minute);
+			} else {
+				time = String.valueOf(minute);
+			}
+			
+			map.put(i, time);
+
+			i = i + 1;
+
+		}
+		return map;
+	}
+	
+	/**
+	 * 出退勤時間から時を切り出して取得
+	 * 
+	 * @return 出退勤時間(時間)
+	 */
+	public Integer getHour(String trainingTime) {
+        String[] time = trainingTime.split(":");
+        int hour = Integer.parseInt(time[0]);
+		return hour;
+	}
+	
+	/**
+	 * 出退勤時間から分を切り出して取得
+	 * 
+	 * @return 出退勤時間(分)
+	 */
+	public Integer getMinute(String trainingTime) {
+        String[] time = trainingTime.split(":");
+        int minute = Integer.parseInt(time[1]);
+		return minute;
+	}
 
 	/**
 	 * 研修日の判定

@@ -47,13 +47,40 @@
 								</th:block>
 								<td class="w140">[[${dailyAttendanceForm.dispTrainingDate}]]</td>
 								<td class="w300">[[${dailyAttendanceForm.sectionName}]]</td>
+<!--								<td class="w70">-->
+<!--									<input type="text" th:name="|attendanceList[${stat.index}].trainingStartTime|"-->
+<!--									th:value="${dailyAttendanceForm.trainingStartTime}" class="form-control" />-->
+<!--								</td>-->
+<!--								<td class="w70">-->
+<!--									<input type="text" th:name="|attendanceList[${stat.index}].trainingEndTime|"-->
+<!--									th:value="${dailyAttendanceForm.trainingEndTime}" class="form-control" />-->
+<!--								</td>-->
+
 								<td class="w70">
-									<input type="text" th:name="|attendanceList[${stat.index}].trainingStartTime|"
-									th:value="${dailyAttendanceForm.trainingStartTime}" class="form-control" />
+									<select th:name="|attendanceList[${stat.index}].trainingStartTimeHour|" class="form-control">
+										<option th:each="training_start_time : ${attendanceForm.hourMap}" th:value="${training_start_time.key}" th:inlne="text" class="form-control" 
+											th:selected="${training_start_time.key == dailyAttendanceForm.trainingStartTime}">[[${training_start_time.value}]]</option>
+									</select>
+								</td>
+								<td>:</td>
+								<td class="w70">
+									<select th:name="|attendanceList[${stat.index}].trainingStartTimeMinute|" class="form-control">
+										<option th:each="training_start_time : ${attendanceForm.minuteMap}" th:value="${training_start_time.key}" th:inlne="text" class="form-control" 
+											th:selected="${training_start_time.key == dailyAttendanceForm.trainingStartTime}">[[${training_start_time.value}]]</option>
+									</select>
 								</td>
 								<td class="w70">
-									<input type="text" th:name="|attendanceList[${stat.index}].trainingEndTime|"
-									th:value="${dailyAttendanceForm.trainingEndTime}" class="form-control" />
+									<select th:name="|attendanceList[${stat.index}].trainingEndTimeHour|" class="form-control">
+										<option th:each="training_end_time : ${attendanceForm.hourMap}" th:value="${training_end_time.key}" th:inlne="text" class="form-control" 
+											th:selected="${training_end_time.key == dailyAttendanceForm.trainingEndTime}">[[${training_end_time.value}]]</option>
+									</select>
+								</td>
+								<td>:</td>
+								<td class="w70">
+									<select th:name="|attendanceList[${stat.index}]trainingEndTimeMinute|" class="form-control">
+										<option th:each="training_end_time : ${attendanceForm.minuteMap}" th:value="${training_end_time.key}" th:inlne="text" class="form-control" 
+											th:selected="${training_end_time.key == dailyAttendanceForm.trainingEndTime}">[[${training_end_time.value}]]</option>
+									</select>
 								</td>
 								<td class="w80">
 									<select th:name="|attendanceList[${stat.index}].blankTime|" class="form-control">
