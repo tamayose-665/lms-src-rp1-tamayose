@@ -33,6 +33,7 @@ public class AttendanceController {
 	/**
 	 * 勤怠管理画面 初期表示
 	 * 
+	 * @author 玉寄妃乃
 	 * @param model モデル
 	 * @return 勤怠管理画面
 	 * @throws ParseException 文字列を日付として再フォーマットする際
@@ -43,8 +44,7 @@ public class AttendanceController {
 		List<AttendanceManagementDto> attendanceManagementDtoList = studentAttendanceService
 				.getAttendanceManagement(loginUserDto.getCourseId(), loginUserDto.getLmsUserId());
 		model.addAttribute("attendanceManagementDtoList", attendanceManagementDtoList);
-		// 玉寄妃乃 – Task.25
-		model.addAttribute("judge", studentAttendanceService.notEnterCount(loginUserDto.getLmsUserId()
+		model.addAttribute("judge", studentAttendanceService.notEnterCheck(loginUserDto.getLmsUserId()
 				));
 		return "attendance/detail";
 	}
@@ -130,8 +130,9 @@ public class AttendanceController {
 	@RequestMapping(path = "/update", params = "complete", method = RequestMethod.POST)
 	public String complete(AttendanceForm attendanceForm, Model model, BindingResult result)
 			throws ParseException {
-
 		// 更新
+		System.out.println("コントローラーきたよー");
+		
 		String message = studentAttendanceService.update(attendanceForm);
 		model.addAttribute("message", message);
 		// 一覧の再取得

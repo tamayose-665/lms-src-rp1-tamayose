@@ -41,14 +41,14 @@ public interface TStudentAttendanceMapper {
 	/**
 	 * 勤怠情報（受講生入力）過去日未入力件数取得
 	 * 
+     * @author 玉寄妃乃
 	 * @param lmsUserId 対象の受講生ユーザーID
-	 * @param trainingDate 現在日付
 	 * @param deleteFlg 削除フラグ
+	 * @param trainingDate 現在日付
 	 * @return 過去日未入力件数の値
 	 */
-	// 玉寄妃乃 – Task.25
 	Integer notEnterCount(@Param("lmsUserId") Integer lmsUserId,
-			@Param("trainingDate") Date trainingDate, @Param("deleteFlg") Short deleteFlg);
+			 @Param("deleteFlg") Short deleteFlg, @Param("trainingDate") Date trainingDate);
 
 	/**
 	 * 勤怠管理画面用DTOリスト取得

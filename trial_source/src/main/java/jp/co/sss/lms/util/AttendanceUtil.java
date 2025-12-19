@@ -137,6 +137,7 @@ public class AttendanceUtil {
 	 * 
 	 * @return 出退勤時間(時)
 	 */
+	// 玉寄妃乃 – Task.26
 	public LinkedHashMap<Integer, String> getHourMap() {
 		LinkedHashMap<Integer, String> map = new LinkedHashMap<>();
 		map.put(null, "");
@@ -162,6 +163,7 @@ public class AttendanceUtil {
 	 * 
 	 * @return 出退勤時間(分)
 	 */
+	// 玉寄妃乃 – Task.26
 	public LinkedHashMap<Integer, String> getMinuteMap() {
 		LinkedHashMap<Integer, String> map = new LinkedHashMap<>();
 		map.put(null, "");
@@ -188,6 +190,7 @@ public class AttendanceUtil {
 	 * 
 	 * @return 出退勤時間(時間)
 	 */
+	// 玉寄妃乃 – Task.26
 	public Integer getHour(String trainingTime) {
         String[] time = trainingTime.split(":");
         int hour = Integer.parseInt(time[0]);
@@ -199,6 +202,7 @@ public class AttendanceUtil {
 	 * 
 	 * @return 出退勤時間(分)
 	 */
+	// 玉寄妃乃 – Task.26
 	public Integer getMinute(String trainingTime) {
         String[] time = trainingTime.split(":");
         int minute = Integer.parseInt(time[1]);
