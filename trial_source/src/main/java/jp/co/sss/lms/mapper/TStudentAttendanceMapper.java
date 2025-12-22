@@ -41,7 +41,7 @@ public interface TStudentAttendanceMapper {
 	/**
 	 * 勤怠情報（受講生入力）過去日未入力件数取得
 	 * 
-     * @author 玉寄妃乃
+     * @author 玉寄妃乃 - Task.25
 	 * @param lmsUserId 対象の受講生ユーザーID
 	 * @param deleteFlg 削除フラグ
 	 * @param trainingDate 現在日付
