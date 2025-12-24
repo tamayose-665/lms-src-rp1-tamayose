@@ -121,6 +121,7 @@ public class AttendanceController {
 	/**
 	 * 勤怠情報直接変更画面 『更新』ボタン押下
 	 * 
+	 * @author 玉寄妃乃 - Task.27
 	 * @param attendanceForm
 	 * @param model
 	 * @param result
@@ -130,9 +131,20 @@ public class AttendanceController {
 	@RequestMapping(path = "/update", params = "complete", method = RequestMethod.POST)
 	public String complete(AttendanceForm attendanceForm, Model model, BindingResult result)
 			throws ParseException {
-		// 更新		
-		String message = studentAttendanceService.update(attendanceForm);
-		model.addAttribute("message", message);
+		// 入力チェック（更新用）
+		studentAttendanceService.updateCheck(attendanceForm, result);
+		if (result.hasErrors()) {
+			return "attendance/update";
+		}
+		// 更新
+		String error = studentAttendanceService.update(attendanceForm);
+		if (error != null) {
+			model.addAttribute("error", error);
+//			attendanceForm.setBlankTimes();
+//			attendanceForm.setHourMap();
+//			attendanceForm.setMinuteMap();
+			return "attendance/update";
+		}
 		// 一覧の再取得
 		List<AttendanceManagementDto> attendanceManagementDtoList = studentAttendanceService
 				.getAttendanceManagement(loginUserDto.getCourseId(), loginUserDto.getLmsUserId());
