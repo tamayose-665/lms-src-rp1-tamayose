@@ -17,11 +17,17 @@
 			<h2><small>途中退校日：${dispLeaveDate}</small></h2>
 		</th:block>
 	</th:block>
+	<!-- 玉寄妃乃 – Task.27 -->
+	<span th:object="${attendanceForm}">
+        <p th:each="error : ${#fields.detailedErrors()}">
+            <font color="red"><span th:text="'*'+ ${error.message}"></span></font>
+        </p>
+	</span>
 
 	<div class="row">
 		<div class="bs-component col-sm-12">
-
-			<form th:action="@{/attendance/update}" method="post">
+			<!-- 玉寄妃乃 – Task.27 -->
+			<form th:action="@{/attendance/update}" method="post" onSubmit="return CheckUpdate()">
 				<table class="table table-hover dataTable no-footer">
 					<thead>
 						<tr>
@@ -97,27 +103,21 @@
 					<th:block th:if="${session.loginUserDto.role != '0001'}">
 						<input type="submit" value="戻る" name="indexCompany" class="btn btn-default" />
 					</th:block>
-					<!-- 玉寄妃乃 – Task.27 idだけ付け足してる -->
-					<input type="submit" value="更新" name="complete" id="update" class="btn btn-info" />
+					<input type="submit" value="更新" name="complete" class="btn btn-info" />
 				</div>
 
 			</form>
 		</div>
 	</div>
 	<!-- 玉寄妃乃 – Task.27 -->
-<!--	<script type="text/javascript" th:inline="javascript">-->
-<!--		function complete(){-->
-<!--			var response = confirm("更新します。よろしいですか?");-->
-<!--			if(response == true){-->
-				
-<!--			} else {-->
-				
-<!--			}-->
-<!--		}	-->
-<!--		let button = document.getElementById("update");-->
-<!--		button.addEventListener("click",complete);-->
-
-<!--	</script>-->
-	
+	<script type="text/javascript" th:inline="javascript">
+		function CheckUpdate(){
+			if(confirm("更新します。よろしいですか?")){
+				return true;
+			} else {
+				return false;
+			}
+		}	
+	</script>
 </body>
 </html>
